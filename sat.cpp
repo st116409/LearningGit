@@ -108,6 +108,25 @@ public:
         }
         return result;
     }
+    set<int> find_pure_literals() const {
+        set<int> ret;
+        set<int> bad_vars;
+
+        for (const auto& c : clauses) {
+            for (int l : c) {
+                if (bad_vars.find(abs(l)) != bad_vars.end()) continue;
+                if (ret.find(l) != ret.end()) continue;
+                if (ret.find(-l) != ret.end()) {
+                    bad_vars.insert(abs(l));
+                    ret.erase(-l);
+                } else {
+                    ret.insert(l);
+                }
+            }
+        }
+        return ret;
+    }
+
 	
     set<int> find_pure_literals() const {
         set<int> ret;
