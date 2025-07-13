@@ -99,13 +99,14 @@ public:
         return ret;
     }
 
-    set<int> find_pure_literals() const {
-        set<int> ret;
+    set<int> find_pure_literals_old() const {
+        set<int> result;
         for (int i = -nvars; i <= nvars; i++) {
             if (i == 0) continue;
+	    //regular comments
             if (is_pure(i)) ret.insert(i);
         }
-        return ret;
+        return result;
     }
 
 
